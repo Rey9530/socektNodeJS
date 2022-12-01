@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require("express");
 const app = express();
 const http = require("http");
@@ -6,7 +8,7 @@ const serve = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(serve);
 
-const port = 3002;
+const port = process.env.PORT;
 
 
 io.on('connection', (socket) => {
@@ -14,7 +16,7 @@ io.on('connection', (socket) => {
 
 
     socket.on('chat_message', (msg) => {
-        
+
         io.emit('chat_message', msg)
     });
 
